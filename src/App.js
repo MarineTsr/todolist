@@ -1,18 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'react-bootstrap';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./assets/styles/index.scss";
+import TodoAdd from "./components/TodoAdd";
+import TodoList from "./components/TodoList";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <Button href="https://reactjs.org" className="App-link" variant="info">Learn React</Button>
-      </header>
+    <div className="bg-light vh-100">
+      <div className="container py-5">
+        <h1>TodoList</h1>
+        <TodoAdd />
+        <hr />
+        <hr />
+        <TodoList />
+      </div>
     </div>
   );
 }

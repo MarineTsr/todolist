@@ -1,0 +1,60 @@
+/*------------------
+		LAYOUT
+-------------------*/
+@use "theme" as *;
+@use "helpers/functions" as fn;
+
+// Global
+* {
+	box-sizing: border-box;
+}
+
+html {
+	font-size: $font-size-ratio;
+}
+
+body {
+	margin: 0;
+	font-family: $font-family;
+	font-size: $font-size-sm;
+	line-height: $lineHeight-default;
+	background-color: fn.getColor($theme-colorscheme, light, main);
+	color: fn.getColor($theme-colorscheme, light, text);
+}
+
+@for $i from 1 through 6 {
+	h#{$i},
+	.h#{$i} {
+		display: block;
+		margin: 0;
+		padding: 0;
+		margin-bottom: 0.7em;
+		font-weight: $font-weight-bold;
+		line-height: $lineHeight-title;
+	}
+}
+
+ul,
+ol {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+img {
+	max-width: 100%;
+}
+
+input {
+	height: $input-h;
+	padding: $input-py $input-px;
+	border: none;
+	border-radius: $radius-default;
+	font-family: $font-family;
+	background-color: $color-light;
+	color: $color-text-dark;
+}
+
+::placeholder {
+	font-family: $font-family;
+}
