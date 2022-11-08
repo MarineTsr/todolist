@@ -20,7 +20,10 @@ function TodoItem({ item, deleteHandler, editHandler, doneHandler }) {
             <button
               type="button"
               className="btn btn-primary"
-              onClick={() => editHandler(item.id)}
+              onClick={(event) => {
+                event.stopPropagation();
+                editHandler(item.id);
+              }}
             >
               Modifier
             </button>
@@ -29,7 +32,10 @@ function TodoItem({ item, deleteHandler, editHandler, doneHandler }) {
           <button
             type="button"
             className="btn btn-danger ms-3"
-            onClick={() => deleteHandler(item.id)}
+            onClick={(event) => {
+              event.stopPropagation();
+              deleteHandler(item.id);
+            }}
           >
             Supprimer
           </button>
