@@ -1,16 +1,38 @@
+import TodoEdit from "./TodoEdit";
 import TodoItem from "./TodoItem";
 
-function TodoList() {
+function TodoList({
+  todoList,
+  deleteHandler,
+  editHandler,
+  editSubmitHandler,
+  doneHandler,
+}) {
   return (
-    <>
-      <p>Une liste de tâches</p>
-      <hr />
-      <TodoItem />
-      <TodoItem />
-      <TodoItem />
-      <TodoItem />
-      <hr />
-    </>
+    <ul>
+      {todoList.length ? (
+        todoList.map((item) =>
+          item.edit ? (
+            <TodoEdit
+              key={item.id}
+              item={item}
+              editSubmitHandler={editSubmitHandler}
+              editHandler={editHandler}
+            />
+          ) : (
+            <TodoItem
+              key={item.id}
+              item={item}
+              deleteHandler={deleteHandler}
+              editHandler={editHandler}
+              doneHandler={doneHandler}
+            />
+          )
+        )
+      ) : (
+        <li>Aucune tâche pour le moment.</li>
+      )}
+    </ul>
   );
 }
 
