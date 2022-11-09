@@ -1,4 +1,5 @@
 import { useState } from "react";
+import TodoButton from "./TodoButton";
 
 function TodoAdd({ submitHandler }) {
   const [inputValue, setInputValue] = useState("");
@@ -23,9 +24,11 @@ function TodoAdd({ submitHandler }) {
           value={inputValue}
           onInput={handleInput}
         />
-        <button type="submit" className="input-group-text btn btn-primary">
-          Ajouter
-        </button>
+        <TodoButton
+          label="Ajouter"
+          type="submit"
+          className="input-group-text btn-primary"
+        />
       </div>
     </form>
   );

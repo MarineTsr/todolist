@@ -1,3 +1,5 @@
+import TodoButton from "./TodoButton";
+
 function TodoItem({ item, deleteHandler, editHandler, doneHandler }) {
   return (
     <li className="form-check my-3">
@@ -17,28 +19,26 @@ function TodoItem({ item, deleteHandler, editHandler, doneHandler }) {
 
         <div>
           {!item.done && (
-            <button
+            <TodoButton
+              label="Modifier"
               type="button"
-              className="btn btn-primary"
+              className="btn-primary"
               onClick={(event) => {
                 event.stopPropagation();
                 editHandler(item.id);
               }}
-            >
-              Modifier
-            </button>
+            />
           )}
 
-          <button
+          <TodoButton
+            label="Supprimer"
             type="button"
-            className="btn btn-danger ms-3"
+            className="btn-danger ms-3"
             onClick={(event) => {
               event.stopPropagation();
               deleteHandler(item.id);
             }}
-          >
-            Supprimer
-          </button>
+          />
         </div>
       </label>
     </li>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import TodoButton from "./TodoButton";
 
 function TodoEdit({ item, editSubmitHandler, editHandler }) {
   const [inputValue, setInputValue] = useState(item.content);
@@ -30,9 +31,11 @@ function TodoEdit({ item, editSubmitHandler, editHandler }) {
           value={inputValue}
           onInput={handleInput}
         />
-        <button type="submit" className="input-group-text btn btn-success">
-          Valider
-        </button>
+        <TodoButton
+          label="Valider"
+          type="submit"
+          className="input-group-text btn-success"
+        />
       </div>
     </form>
   );
