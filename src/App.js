@@ -1,66 +1,65 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/styles/index.scss";
-import { useState } from "react";
+import { useReducer } from "react";
 import TodoAdd from "./components/TodoAdd";
 import TodoList from "./components/TodoList";
-import themeContext from "./data/theme";
+import themeContext from "./context/theme";
 import ThemeSwitcher from "./components/ThemeSwitcher";
+import todoReducer from "./reducers/todoReducer";
+
+const initialState = { todoList: [], currentTheme: "light" };
 
 function App() {
-  const [todoList, setTodoList] = useState([]);
-  const [currentTheme, setCurrentTheme] = useState("light");
+  const [state, dispatch] = useReducer(todoReducer, initialState);
 
   const handleSubmit = (text) => {
-    if (text.length > 0) {
-      setTodoList([
-        ...todoList,
-        {
-          id: crypto.randomUUID(),
-          content: text,
-          done: false,
-          edit: false,
-        },
-      ]);
-    }
+    dispatch({
+      type: "TODO_SUBMIT",
+      text,
+    });
   };
 
   const handleDelete = (id) => {
-    const todoListUpdated = todoList.filter((item) => item.id !== id);
-    setTodoList(todoListUpdated);
+    dispatch({
+      type: "TODO_DELETE",
+      id,
+    });
   };
 
   const handleEdit = (id) => {
-    const todoListUpdated = todoList.map((item) =>
-      item.id === id ? { ...item, edit: !item.edit } : item
-    );
-    setTodoList(todoListUpdated);
+    dispatch({
+      type: "TODO_EDIT_MODE",
+      id,
+    });
   };
 
   const handleEditSubmit = (id, text) => {
-    if (text.length > 0) {
-      const todoListUpdated = todoList.map((item) =>
-        item.id === id ? { ...item, content: text, edit: false } : item
-      );
-      setTodoList(todoListUpdated);
-    }
+    dispatch({
+      type: "TODO_EDIT_SUBMIT",
+      id,
+      text,
+    });
   };
 
   const handleDone = (id) => {
-    const todoListUpdated = todoList.map((item) =>
-      item.id === id ? { ...item, done: !item.done } : item
-    );
-    setTodoList(todoListUpdated);
+    dispatch({
+      type: "TODO_IS_DONE",
+      id,
+    });
   };
 
   const handleThemeSwitcher = (event) => {
-    setCurrentTheme(event.target.checked ? "dark" : "light");
+    dispatch({
+      type: "THEME_SWITCHER",
+      event,
+    });
   };
 
   return (
-    <themeContext.Provider value={currentTheme}>
+    <themeContext.Provider value={state.currentTheme}>
       <div
-        className={`vh-100 bg-${currentTheme} ${
-          currentTheme === "dark" ? "text-white" : "text-dark"
+        className={`vh-100 bg-${state.currentTheme} ${
+          state.currentTheme === "dark" ? "text-white" : "text-dark"
         }`}
       >
         <div className="container py-5">
@@ -72,7 +71,7 @@ function App() {
           <TodoAdd submitHandler={handleSubmit} />
           <hr className="mt-5 mb-4" />
           <TodoList
-            todoList={todoList}
+            todoList={state.todoList}
             deleteHandler={handleDelete}
             editHandler={handleEdit}
             editSubmitHandler={handleEditSubmit}

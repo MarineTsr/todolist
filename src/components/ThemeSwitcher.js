@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import themeContext from "./../data/theme";
+import themeContext from "./../context/theme";
 
 function ThemeSwitcher({ switchHandler }) {
   const theme = useContext(themeContext);
