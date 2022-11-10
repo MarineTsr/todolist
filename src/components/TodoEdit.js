@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import TodoButton from "./TodoButton";
+import { todoDispatchContext } from "./../context/todo";
 
-function TodoEdit({ item, editSubmitHandler, editHandler }) {
+function TodoEdit({ item }) {
   const [inputValue, setInputValue] = useState(item.content);
+  const dispatch = useContext(todoDispatchContext);
 
   const handleInput = (event) => {
     setInputValue(event.target.value);
@@ -10,7 +12,10 @@ function TodoEdit({ item, editSubmitHandler, editHandler }) {
 
   const handleKeyDown = (event) => {
     if (event.key === "Escape") {
-      editHandler(item.id);
+      dispatch({
+        type: "TODO_EDIT_MODE",
+        id: item.id,
+      });
     }
   };
 
@@ -18,7 +23,11 @@ function TodoEdit({ item, editSubmitHandler, editHandler }) {
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        editSubmitHandler(item.id, inputValue);
+        dispatch({
+          type: "TODO_EDIT_SUBMIT",
+          id: item.id,
+          text: inputValue,
+        });
       }}
       onKeyDown={handleKeyDown}
     >

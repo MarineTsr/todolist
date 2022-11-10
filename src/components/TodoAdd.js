@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import TodoButton from "./TodoButton";
+import { todoDispatchContext } from "./../context/todo";
 
-function TodoAdd({ submitHandler }) {
+function TodoAdd() {
   const [inputValue, setInputValue] = useState("");
+  const dispatch = useContext(todoDispatchContext);
 
   const handleInput = (event) => {
     setInputValue(event.target.value);
@@ -12,7 +14,10 @@ function TodoAdd({ submitHandler }) {
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        submitHandler(inputValue);
+        dispatch({
+          type: "TODO_SUBMIT",
+          text: inputValue,
+        });
         setInputValue("");
       }}
     >

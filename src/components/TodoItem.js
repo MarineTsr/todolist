@@ -1,13 +1,22 @@
 import TodoButton from "./TodoButton";
+import { todoDispatchContext } from "./../context/todo";
+import { useContext } from "react";
 
-function TodoItem({ item, deleteHandler, editHandler, doneHandler }) {
+function TodoItem({ item }) {
+  const dispatch = useContext(todoDispatchContext);
+
   return (
     <li className="form-check my-3">
       <input
         className="form-check-input me-3"
         id={item.id}
         type="checkbox"
-        onClick={() => doneHandler(item.id)}
+        onClick={() =>
+          dispatch({
+            type: "TODO_IS_DONE",
+            id: item.id,
+          })
+        }
       />
       <label
         className="form-check-label d-flex justify-content-between"
@@ -25,7 +34,10 @@ function TodoItem({ item, deleteHandler, editHandler, doneHandler }) {
               className="btn-primary"
               onClick={(event) => {
                 event.stopPropagation();
-                editHandler(item.id);
+                dispatch({
+                  type: "TODO_EDIT_MODE",
+                  id: item.id,
+                });
               }}
             />
           )}
@@ -36,7 +48,10 @@ function TodoItem({ item, deleteHandler, editHandler, doneHandler }) {
             className="btn-danger ms-3"
             onClick={(event) => {
               event.stopPropagation();
-              deleteHandler(item.id);
+              dispatch({
+                type: "TODO_DELETE",
+                id: item.id,
+              });
             }}
           />
         </div>

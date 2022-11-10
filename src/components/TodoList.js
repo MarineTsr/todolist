@@ -1,32 +1,19 @@
 import TodoEdit from "./TodoEdit";
 import TodoItem from "./TodoItem";
+import { todoStateContext } from "./../context/todo";
+import { useContext } from "react";
 
-function TodoList({
-  todoList,
-  deleteHandler,
-  editHandler,
-  editSubmitHandler,
-  doneHandler,
-}) {
+function TodoList() {
+  const state = useContext(todoStateContext);
+
   return (
     <ul>
-      {todoList.length ? (
-        todoList.map((item) =>
+      {state.todoList.length ? (
+        state.todoList.map((item) =>
           item.edit ? (
-            <TodoEdit
-              key={item.id}
-              item={item}
-              editSubmitHandler={editSubmitHandler}
-              editHandler={editHandler}
-            />
+            <TodoEdit key={item.id} item={item} />
           ) : (
-            <TodoItem
-              key={item.id}
-              item={item}
-              deleteHandler={deleteHandler}
-              editHandler={editHandler}
-              doneHandler={doneHandler}
-            />
+            <TodoItem key={item.id} item={item} />
           )
         )
       ) : (
