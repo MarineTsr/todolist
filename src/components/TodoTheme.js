@@ -1,10 +1,8 @@
 import { useContext } from "react";
 import { todoStateContext, todoDispatchContext } from "../context/todo";
-import TodoAdd from "./TodoAdd";
-import TodoList from "./TodoList";
 import ThemeSwitcher from "./ThemeSwitcher";
 
-function TodoTheme() {
+function TodoTheme({ children }) {
   const state = useContext(todoStateContext);
   const dispatch = useContext(todoDispatchContext);
 
@@ -26,10 +24,7 @@ function TodoTheme() {
           <ThemeSwitcher switchHandler={handleThemeSwitcher} />
         </div>
 
-        <h1>TodoList</h1>
-        <TodoAdd />
-        <hr className="mt-5 mb-4" />
-        <TodoList />
+        {children}
       </div>
     </div>
   );
