@@ -9,18 +9,18 @@ function TodoItem({ item }) {
     <li className="form-check my-3">
       <input
         className="form-check-input me-3"
-        id={item.id}
+        id={item._id}
         type="checkbox"
         onClick={() =>
           dispatch({
             type: "TODO_IS_DONE",
-            id: item.id,
+            id: item._id,
           })
         }
       />
       <label
         className="form-check-label d-flex justify-content-between"
-        htmlFor={item.id}
+        htmlFor={item._id}
       >
         <span className={`${item.done ? "text-decoration-line-through" : ""}`}>
           {item.content}
@@ -36,7 +36,7 @@ function TodoItem({ item }) {
                 event.stopPropagation();
                 dispatch({
                   type: "TODO_EDIT_MODE",
-                  id: item.id,
+                  id: item._id,
                 });
               }}
             />
@@ -50,7 +50,7 @@ function TodoItem({ item }) {
               event.stopPropagation();
               dispatch({
                 type: "TODO_DELETE",
-                id: item.id,
+                id: item._id,
               });
             }}
           />

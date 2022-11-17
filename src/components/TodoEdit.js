@@ -14,7 +14,7 @@ function TodoEdit({ item }) {
     if (event.key === "Escape") {
       dispatch({
         type: "TODO_EDIT_MODE",
-        id: item.id,
+        id: item._id,
       });
     }
   };
@@ -25,7 +25,7 @@ function TodoEdit({ item }) {
         event.preventDefault();
         dispatch({
           type: "TODO_EDIT_SUBMIT",
-          id: item.id,
+          id: item._id,
           text: inputValue,
         });
       }}

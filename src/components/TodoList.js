@@ -11,9 +11,9 @@ function TodoList() {
       {state.todoList.length ? (
         state.todoList.map((item) =>
           item.edit ? (
-            <TodoEdit key={item.id} item={item} />
+            <TodoEdit key={item._id} item={item} />
           ) : (
-            <TodoItem key={item.id} item={item} />
+            <TodoItem key={item._id} item={item} />
           )
         )
       ) : (
