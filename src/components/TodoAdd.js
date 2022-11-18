@@ -5,6 +5,7 @@ import { todoDispatchContext } from "./../context/todo";
 function TodoAdd() {
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const dispatch = useContext(todoDispatchContext);
 
   const handleInput = (event) => {
@@ -31,14 +32,16 @@ function TodoAdd() {
 
         if (response.ok) {
           dispatch({
-            type: "TODO_SUBMIT",
+            type: "TODO_ADD",
             todo: await response.json(),
           });
 
           setInputValue("");
+        } else {
+          setError("Une erreur est survenue.");
         }
       } catch (e) {
-        console.error(e);
+        setError("Une erreur est survenue.");
       } finally {
         setIsLoading(false);
       }
@@ -61,7 +64,8 @@ function TodoAdd() {
           className="input-group-text btn-primary"
         />
       </div>
-      {isLoading && <p className="mt-3">Chargement...</p>}
+      {isLoading && <p className="form-text mt-3 mb-0">Chargement...</p>}
+      {error && <p className="d-block invalid-feedback mt-3 mb-0">{error}</p>}
     </form>
   );
 }

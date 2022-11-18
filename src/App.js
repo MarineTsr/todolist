@@ -11,7 +11,7 @@ function App() {
       <TodoTheme>
         <h1>TodoList</h1>
         <TodoAdd />
-        <hr className="mt-5 mb-4" />
+        <hr className="my-4" />
         <TodoList />
       </TodoTheme>
     </TodoProvider>

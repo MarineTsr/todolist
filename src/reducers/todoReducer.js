@@ -1,40 +1,32 @@
 function todoReducer(state, action) {
   switch (action.type) {
-    case "TODO_SUBMIT":
+    case "TODO_INIT":
+      return {
+        ...state,
+        todoList: action.todoList,
+      };
+    case "TODO_ADD":
       return {
         ...state,
         todoList: [...state.todoList, action.todo],
       };
+    case "TODO_UPDATE":
+      return {
+        ...state,
+        todoList: state.todoList.map((item) =>
+          item._id === action.todo._id ? action.todo : item
+        ),
+      };
     case "TODO_DELETE":
       return {
         ...state,
-        todoList: state.todoList.filter((item) => item._id !== action._id),
+        todoList: state.todoList.filter((item) => item._id !== action.todo._id),
       };
     case "TODO_EDIT_MODE":
       return {
         ...state,
         todoList: state.todoList.map((item) =>
           item._id === action._id ? { ...item, edit: !item.edit } : item
-        ),
-      };
-    case "TODO_EDIT_SUBMIT":
-      if (action.text.length > 0) {
-        return {
-          ...state,
-          todoList: state.todoList.map((item) =>
-            item._id === action._id
-              ? { ...item, content: action.text, edit: false }
-              : item
-          ),
-        };
-      } else {
-        return state;
-      }
-    case "TODO_IS_DONE":
-      return {
-        ...state,
-        todoList: state.todoList.map((item) =>
-          item._id === action._id ? { ...item, done: !item.done } : item
         ),
       };
     case "THEME_SWITCHER":
