@@ -31,17 +31,17 @@ function TodoItem({ item }) {
     }
   };
 
-  const deleteTodo = async (todo) => {
+  const deleteTodo = async () => {
     try {
       const response = await fetch(
-        `https://restapi.fr/api/MTtodos/${todo._id}`,
+        `https://restapi.fr/api/MTtodos/${item._id}`,
         { method: "DELETE" }
       );
 
       if (response.ok) {
         dispatch({
           type: "TODO_DELETE",
-          todo: await response.json(),
+          _id: item._id,
         });
       }
     } catch (e) {
@@ -88,7 +88,7 @@ function TodoItem({ item }) {
             className="btn-danger ms-3"
             onClick={(event) => {
               event.stopPropagation();
-              deleteTodo(item);
+              deleteTodo();
             }}
           />
         </div>

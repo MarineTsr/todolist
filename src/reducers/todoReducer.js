@@ -20,7 +20,7 @@ function todoReducer(state, action) {
     case "TODO_DELETE":
       return {
         ...state,
-        todoList: state.todoList.filter((item) => item._id !== action.todo._id),
+        todoList: state.todoList.filter((item) => item._id !== action._id),
       };
     case "TODO_EDIT_MODE":
       return {
