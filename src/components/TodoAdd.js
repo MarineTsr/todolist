@@ -57,11 +57,13 @@ function TodoAdd() {
           className="form-control"
           value={inputValue}
           onInput={handleInput}
+          data-cy="saisir"
         />
         <TodoButton
           label="Ajouter"
           type="submit"
           className="input-group-text btn-primary"
+          data-cy="ajouter"
         />
       </div>
       {isLoading && <p className="form-text mt-3 mb-0">Chargement...</p>}
